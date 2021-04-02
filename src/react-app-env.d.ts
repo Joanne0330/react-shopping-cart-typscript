@@ -7,8 +7,3 @@ declare module "react/jsx-runtime" {
 declare module "react" {
     export default any;
 }
-
-
-// declare module "react/useState" {
-//     export default any;
-// }
