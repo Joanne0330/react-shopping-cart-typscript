@@ -66,7 +66,7 @@ const App = () => {
           return [...acc, item] // we don't do anything
         }
 
-      }, [] as CartItemType[])
+      }, [] as CartItemType[]) //the acc starts with empty [] of CartItemType
     ))
   };
 
