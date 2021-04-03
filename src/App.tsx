@@ -39,7 +39,6 @@ const App = () => {
     items.reduce((acc: number, item) => acc + item.amount, 0);
 
   const handleAddToCart = (clickedItem: CartItemType) => {
-    
     setCartItems((prev: any) => {
       // 1. Is the item already added in the cart?
       const isItemInCart = prev.find((item: any) => item.id === clickedItem.id);
@@ -53,11 +52,23 @@ const App = () => {
       }
       // First time the item is added:
       return [...prev, { ...clickedItem, amount: 1 }];
-
     });
   };
 
-  const handleRemoveFromCart = () => null;
+  const handleRemoveFromCart = (id: number) => {
+    setCartItems((prev: any) => (
+      prev.reduce((acc: any, item: any) => {
+
+        if(item.id === id) { // if we're on the item that we clicked on:
+          if(item.amount === 1) return acc; // we remove this item from the array by only returning the accumulator
+          return [...acc, { ...item, amount: item.amount -1}]
+        } else {
+          return [...acc, item] // we don't do anything
+        }
+
+      }, [] as CartItemType[])
+    ))
+  };
 
   if(isLoading) return <LinearProgress />
   if(error) return <div>Something went wrong...</div>
